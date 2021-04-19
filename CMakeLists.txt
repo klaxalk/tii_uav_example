@@ -7,12 +7,15 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   nodelet
+  nav_msgs
+  mrs_lib
+  mrs_msgs
   )
 
 catkin_package(
   #  INCLUDE_DIRS include
   LIBRARIES TiiUavExample
-  CATKIN_DEPENDS roscpp
+  CATKIN_DEPENDS roscpp nav_msgs mrs_lib mrs_msgs
   )
 
 include_directories(

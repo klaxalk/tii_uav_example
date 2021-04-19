@@ -24,6 +24,21 @@
       <!-- Load a user param file -->
       <rosparam if="$(eval not arg('custom_config') == '')" file="$(arg custom_config)" />
 
+      <!-- Subscribers in -->
+      <remap from="~other_uav_odom_in" to="/uav1/odometry/odom_main" />
+      <remap from="~this_uav_cmd_in" to="/uav2/control_manager/cmd_odom" />
+      <remap from="~this_uav_control_diag_in" to="/uav2/control_manager/diagnostics" />
+
+      <!-- Services out -->
+      <remap from="~land_home_out" to="/uav2/uav_manager/land_home" />
+      <remap from="~path_out" to="/uav2/trajectory_generation/path" />
+
+      <!-- Services in -->
+      <remap from="~start_in" to="~start" />
+
+      <!-- Publishers out -->
+      <remap from="~diagnostics_out" to="~diagnostics" />
+
     </node>
 
   </group>
