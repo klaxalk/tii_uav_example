@@ -1,0 +1,31 @@
+<launch>
+
+  <arg name="UAV_NAME" default="$(env UAV_NAME)" />
+  <arg name="custom_config" default="" />
+  <arg name="standalone" default="true" />
+  <arg name="debug" default="false" />
+
+  <!-- define launch-prefix for debugging -->
+  <arg     if="$(arg debug)" name="launch_prefix" value="debug_roslaunch" />
+  <arg unless="$(arg debug)" name="launch_prefix" value="" />
+
+  <!-- switching between standalone and nodeleted nodelet -->
+  <arg     if="$(arg standalone)" name="nodelet" value="standalone" />
+  <arg unless="$(arg standalone)" name="nodelet" value="load" />
+  <arg     if="$(arg standalone)" name="nodelet_manager" value="" />
+  <arg unless="$(arg standalone)" name="nodelet_manager" value="$(arg UAV_NAME)_example_nodelet_manager" />
+
+  <group ns="$(arg UAV_NAME)">
+
+    <node name="tii_uav_example" pkg="nodelet" type="nodelet" args="$(arg nodelet) tii_uav_example/TiiUavExample $(arg nodelet_manager)" output="screen" launch-prefix="$(arg launch_prefix)">
+
+      <rosparam file="$(find tii_uav_example)/config/default.yaml" />
+
+      <!-- Load a user param file -->
+      <rosparam if="$(eval not arg('custom_config') == '')" file="$(arg custom_config)" />
+
+    </node>
+
+  </group>
+
+</launch>

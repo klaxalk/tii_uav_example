@@ -1,0 +1,5 @@
+<library path="lib/libTiiUavExample">
+  <class name="tii_uav_example/TiiUavExample" type="tii_uav_example::TiiUavExample" base_class_type="nodelet::Nodelet">
+    <description>TiiUavExample</description>
+  </class>
+</library>
